@@ -23,7 +23,7 @@ const Home = (): JSX.Element => {
     if (state.medication.length) {
       state.medication.map((i) => arr.push({ text_extraction: { text_segment: i }, display_name: 'MedicationTitle' }))
     }
-    setJsondata({ annotations: arr, text_snippet: input })
+    setJsondata({ annotations: arr, text_snippet: { content: input } })
   }, [state, input])
 
   const onInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -52,13 +52,13 @@ const Home = (): JSX.Element => {
       const t = document.getSelection()
       if (t && t.focusOffset && selectedButton && t.anchorNode?.parentElement?.id === 'input-selection') {
         console.log(selectedButton)
-        resetButton()
+        const range = t.getRangeAt(0)
         if (lastCaught[0] === selectedButton && lastCaught[1] === t.anchorOffset && lastCaught[2] === t.focusOffset) {
           return
         } else {
           lastCaught = [selectedButton, t.anchorOffset, t.focusOffset]
+          resetButton()
         }
-        const range = t.getRangeAt(0)
         if (range.startOffset === input.length - 1 || !(range.endOffset - range.startOffset)) {
           return
         }
@@ -109,7 +109,7 @@ const Home = (): JSX.Element => {
           onChange={onInputChange}
           placeholder="Paste initial text here and then use highlighting tools on below textbox..."
           rows={10}
-          className="bg-gray-200 rounded-md w-full box-border"
+          className="bg-gray-200 rounded-md w-full box-border text-gray-500 p-2"
         />
 
         <div className="flex justify-between mt-5">
@@ -168,7 +168,7 @@ const Home = (): JSX.Element => {
             ))}
           </div>
         </div>
-        <div className="bg-gray-200 rounded-md w-full mt-5">
+        <div className="bg-gray-200 rounded-md w-full mt-5 p-2 text-purple-800">
           <pre>
             <code>{JSON.stringify(jsondata, null, 4)}</code>
           </pre>
