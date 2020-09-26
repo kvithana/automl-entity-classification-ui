@@ -153,9 +153,11 @@ const Home = (): JSX.Element => {
             Reset
           </button>
         </div>
+
         <div id="input-selection" className="w-full bg-gray-900 text-white rounded-md mt-8 mb-8 p-5">
           {input}
         </div>
+
         <div className="w-full flex bg-gray-100 rounded-md p-5 items-center">
           <div className="pr-2">Medication Title:</div>{' '}
           <div className="flex">
@@ -201,7 +203,7 @@ const Home = (): JSX.Element => {
             <code>{JSON.stringify(jsondata, null, 4)}</code>
           </pre>
         </div>
-        <div className="flex flex-row-reverse w-full">
+        <div className="flex flex-row-reverse w-full" style={{ overflowWrap: 'break-word' }}>
           <button className="p-2 m-2 rounded-md bg-blue-900 text-white" onClick={onCopy}>
             Copy
           </button>
