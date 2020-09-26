@@ -154,9 +154,11 @@ const Home = (): JSX.Element => {
           </button>
         </div>
 
-        <div id="input-selection" className="w-full bg-gray-900 text-white rounded-md mt-8 mb-8 p-5">
-          {input}
-        </div>
+        <pre>
+          <div id="input-selection" className="w-full bg-gray-900 text-white rounded-md mt-8 mb-8 p-5">
+            {input}
+          </div>
+        </pre>
 
         <div className="w-full flex bg-gray-100 rounded-md p-5 items-center">
           <div className="pr-2">Medication Title:</div>{' '}
