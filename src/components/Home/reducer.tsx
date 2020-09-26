@@ -6,13 +6,14 @@ interface SegmentData {
 interface AnnotationState {
   medication: SegmentData[]
   active_ingredient: SegmentData[]
+  dosage: SegmentData[]
   frequency: SegmentData[]
 }
 
 interface Action {
   type: 'add' | 'clear'
   payload?: {
-    type: 'medication' | 'active_ingredient' | 'frequency'
+    type: 'medication' | 'active_ingredient' | 'frequency' | 'dosage'
     data: SegmentData
   }
 }
@@ -20,6 +21,7 @@ interface Action {
 export const initialState: AnnotationState = {
   medication: [],
   active_ingredient: [],
+  dosage: [],
   frequency: [],
 }
 

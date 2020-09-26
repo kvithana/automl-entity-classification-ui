@@ -23,6 +23,9 @@ const Home = (): JSX.Element => {
     if (state.medication.length) {
       state.medication.map((i) => arr.push({ text_extraction: { text_segment: i }, display_name: 'MedicationTitle' }))
     }
+    if (state.dosage.length) {
+      state.dosage.map((i) => arr.push({ text_extraction: { text_segment: i }, display_name: 'Dosage' }))
+    }
     setJsondata({ annotations: arr, text_snippet: { content: input } })
   }, [state, input])
 
@@ -91,6 +94,15 @@ const Home = (): JSX.Element => {
               },
             })
             break
+          case '4':
+            dispatch({
+              type: 'add',
+              payload: {
+                type: 'dosage',
+                data: { start_offset: range.startOffset, end_offset: range.endOffset },
+              },
+            })
+            break
           default:
             return
         }
@@ -124,6 +136,12 @@ const Home = (): JSX.Element => {
             className={`${selectedButton === 2 ? 'bg-green-400' : 'bg-gray-400'} text-white p-2 m-2 rounded-md`}
           >
             Frequency
+          </button>
+          <button
+            onClick={() => selectButton(4)}
+            className={`${selectedButton === 4 ? 'bg-orange-400' : 'bg-gray-400'} text-white p-2 m-2 rounded-md`}
+          >
+            Dosage
           </button>
           <button
             onClick={() => selectButton(3)}
@@ -163,6 +181,16 @@ const Home = (): JSX.Element => {
           <div className="flex">
             {state.frequency.map((i) => (
               <div key={i.start_offset} className="p-1 rounded-md bg-green-400 text-white mr-1">
+                {input.slice(i.start_offset, i.end_offset)}
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="w-full flex bg-gray-100 rounded-md mt-5 p-5 items-center">
+          <div className="pr-2">Dosage:</div>{' '}
+          <div className="flex">
+            {state.dosage.map((i) => (
+              <div key={i.start_offset} className="p-1 rounded-md bg-orange-400 text-white mr-1">
                 {input.slice(i.start_offset, i.end_offset)}
               </div>
             ))}
